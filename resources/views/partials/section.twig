@@ -1,0 +1,24 @@
+<div class="card {{ section.stacked ? 'card-flex' }}" {{ html_attributes(section.attributes) }}>
+
+    {% include "streams::form/partials/header" with {"section": section} %}
+
+    {% if section.fields %}
+
+        <div class="card-block">
+            {% include "streams::form/partials/fields" with {"fields": prefix_fields(section.fields, form)} %}
+        </div>
+
+    {% elseif section.tabs %}
+
+        {# No card block - tabs push to the edges #}
+        {% include "anomaly.field_type.repeater::form/partials/tabs" with {"tabs": section.tabs, "stacked": section.stacked} %}
+
+    {% elseif section.rows %}
+
+        <div class="card-block">
+            {% include "anomaly.field_type.repeater::form/partials/rows" with {"rows": section.rows} %}
+        </div>
+
+    {% endif %}
+
+</div>

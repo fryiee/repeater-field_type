@@ -18,6 +18,14 @@ use Illuminate\Contracts\Container\Container;
  */
 class RepeaterFieldTypeServiceProvider extends AddonServiceProvider
 {
+    /**
+     * The addon plugins.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'Anomaly\RepeaterFieldType\RepeaterFieldTypePlugin'
+    ];
 
     /**
      * The addon routes.

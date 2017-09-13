@@ -1,3 +1,31 @@
 <div class="form">
-    {{ form.render_fields|raw }}
+    {% if form.fields.empty %}
+
+        <div class="card">
+            <div class="card-block">
+                {{ trans("streams::message.no_fields_available") }}
+            </div>
+        </div>
+
+    {% else %}
+
+        {% if not form.sections.empty() %}
+
+            {% for section in form.sections %}
+                {% if section.view %}
+                    {% include section.view %}
+                {% elseif section.html %}
+                    {{ section.html|raw }}
+                {% else %}
+                    {% include "anomaly.field_type.repeater::partials/section" %}
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            {# we can include default here because the view prefixes correctly in default #}
+            {% include "streams::form/partials/default" %}
+        {% endif %}
+
+    {% endif %}
+
 </div>
